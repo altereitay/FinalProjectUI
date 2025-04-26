@@ -55,7 +55,7 @@ export default function Library() {
                 </div>
 
                 <Link to='/'>
-                    <Button className="bg-indigo-600 hover:bg-indigo-700 w-full md:w-auto">
+                    <Button variant='outline'>
                         <Plus className="h-4 w-4 mr-2"/>
                         Upload New Article
                     </Button>
