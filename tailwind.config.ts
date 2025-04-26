@@ -3,6 +3,7 @@ const config = {
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
+        "./src/styles/**/*.css"
     ],
     theme: {
         extend: {
@@ -31,6 +32,8 @@ const config = {
                 ring: "hsl(243, 75%, 59%)",
                 background: "#ffffff",
                 foreground: "#111827",
+                white: '#ffffff',
+                black: '#000000',
             },
         },
     },

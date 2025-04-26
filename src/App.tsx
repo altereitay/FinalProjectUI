@@ -1,4 +1,4 @@
-import './App.css'
+// import './App.css'
 import Layout from "./Layout";
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -12,7 +12,6 @@ function App() {
                 <Routes>
                     <Route
                         path="/"
-                        // element={<Upload/>}
                         element={
                             <Layout currentPageName="Upload">
                                 <Upload/>
@@ -21,7 +20,6 @@ function App() {
                     />
                     <Route
                         path="/library"
-                        // element={<Library/>}
                         element={
                             <Layout currentPageName="Library">
                                 <Library/>

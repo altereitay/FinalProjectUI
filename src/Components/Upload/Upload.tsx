@@ -9,13 +9,13 @@ import SimplifiedArticle from "../Article/SimplifiedArticle";
 
 export default function Upload() {
     const navigate = useNavigate();
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<File | null>(null);
     const [processing, setProcessing] = useState(false);
     const [processingStage, setProcessingStage] = useState("uploading");
-    const [simplifiedArticle, setSimplifiedArticle] = useState(null);
-    const [error, setError] = useState(null);
+    const [simplifiedArticle, setSimplifiedArticle] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleFileSelected = (selectedFile) => {
+    const handleFileSelected = (selectedFile: File) => {
         setFile(selectedFile);
         setError(null);
     };
@@ -27,48 +27,39 @@ export default function Upload() {
             setProcessing(true);
             setProcessingStage("uploading");
 
-            // Upload the file
-            //TODO: add upload file
+            // TODO: Upload file API
 
             setProcessingStage("analyzing");
 
-            // Extract text from the uploaded file
-            // TODO: add data extraction
-            let extractionResult = {
-                status: 'success',
+            // TODO: Extraction API
+            const extractionResult = {
+                status: "success",
                 output: {
-                    text: 'test text',
-                    title: 'article number 1'
-                }
-            }
-
+                    text: "test text",
+                    title: "article number 1",
+                },
+            };
 
             if (extractionResult.status !== "success") {
                 throw new Error("Failed to extract text from the document");
             }
 
             const originalText = extractionResult.output.text || "";
-            const extractedTitle = extractionResult.output.title || file.name.replace(/\.[^/.]+$/, "");
+            const extractedTitle =
+                extractionResult.output.title || file.name.replace(/\.[^/.]+$/, "");
 
-            // Simplify the article using LLM
-
-            // Create the processed article
             const articleData = {
                 title: extractedTitle,
                 original_text: originalText,
-                simplified_text: 'simplified version',
+                simplified_text: "simplified version",
                 date_simplified: new Date().toISOString(),
-                terms: ['term 1', 'term 2']
+                terms: ["term 1", "term 2"],
             };
-
-            // Save to database
-            // TODO: add this
-
 
             setProcessingStage("completed");
             setSimplifiedArticle({
                 ...articleData,
-                id: 1
+                id: 1,
             });
         } catch (err) {
             console.error("Error processing article:", err);
@@ -78,16 +69,16 @@ export default function Upload() {
     };
 
     const viewSimplifiedArticle = () => {
-        //TODO: add dynamic pages to articles
-        navigate('/art1');
+        navigate("/art1");
     };
 
     return (
-
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Upload Scientific Article</h1>
-                <p className="text-gray-500">
+                <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">
+                    Upload Scientific Article
+                </h1>
+                <p className="text-gray-600 dark:text-gray-300">
                     Upload a scientific article and we'll simplify it for easier understanding
                 </p>
             </div>
@@ -97,24 +88,35 @@ export default function Upload() {
                     <FileUploadZone onFileSelected={handleFileSelected}/>
 
                     {file && (
-                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <div className="flex items-center">
-                                <div className="bg-white p-2 rounded border mr-3">
-                                    <svg className="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <div className="bg-white dark:bg-gray-700 p-2 rounded border dark:border-gray-600 mr-3">
+                                    <svg
+                                        className="w-8 h-8 text-indigo-500 dark:text-indigo-400"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        />
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="font-medium">{file.name}</p>
-                                    <p className="text-sm text-gray-500">{Math.round(file.size / 1024)} KB</p>
+                                    <p className="font-medium text-gray-800 dark:text-white">{file.name}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        {Math.round(file.size / 1024)} KB
+                                    </p>
                                 </div>
                             </div>
 
                             <Button
                                 onClick={processArticle}
-                                className="bg-indigo-600 hover:bg-indigo-700"
+                                className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white"
                             >
                                 Process Article
                                 <ArrowRight className="ml-2 h-4 w-4"/>
@@ -123,7 +125,7 @@ export default function Upload() {
                     )}
 
                     {error && (
-                        <div className="bg-red-50 text-red-700 p-4 rounded-lg">
+                        <div className="bg-red-50 dark:bg-red-900 text-red-700 dark:text-red-300 p-4 rounded-lg">
                             {error}
                         </div>
                     )}
@@ -131,20 +133,16 @@ export default function Upload() {
             )}
 
             {processing && !simplifiedArticle && (
-                <ArticleProcessingPreview
-                    fileName={file?.name}
-                    stage={processingStage}
-                />
+                <ArticleProcessingPreview fileName={file?.name} stage={processingStage}/>
             )}
 
             {simplifiedArticle && (
                 <div className="space-y-6">
                     <SimplifiedArticle article={simplifiedArticle}/>
-
                     <div className="flex justify-end">
                         <Button
                             onClick={viewSimplifiedArticle}
-                            className="bg-indigo-600 hover:bg-indigo-700"
+                            className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white"
                         >
                             Save & View in Library
                             <ArrowRight className="ml-2 h-4 w-4"/>
@@ -153,6 +151,5 @@ export default function Upload() {
                 </div>
             )}
         </div>
-
     );
 }
