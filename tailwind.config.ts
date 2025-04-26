@@ -17,7 +17,7 @@ const config = {
                 "fade-in": "fade-in 0.2s ease-out",
             },
             colors: {
-                primary: "hsl(243, 75%, 59%)",        // Indigo-600
+                primary: "hsl(243, 75%, 59%)",
                 "primary-foreground": "#ffffff",
                 secondary: "hsl(210, 40%, 96%)",
                 "secondary-foreground": "hsl(222, 47%, 11%)",

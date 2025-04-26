@@ -75,7 +75,7 @@ export default function Upload() {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-2">
+                <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
                     Upload Scientific Article
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300">

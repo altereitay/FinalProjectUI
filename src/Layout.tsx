@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FileText, Upload, History, Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/Components/ui/ThemeProvider"; // your correct import
+import { useTheme } from "@/Components/ui/ThemeProvider";
 
 export default function Layout({ children, currentPageName }: { children: React.ReactNode; currentPageName: string }) {
     const [menuOpen, setMenuOpen] = useState(false);
-    const { theme, toggleTheme } = useTheme(); // using toggleTheme
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-950">
