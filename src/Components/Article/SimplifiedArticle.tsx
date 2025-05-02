@@ -9,7 +9,7 @@ import {Button} from "../ui/button";
 import {Share2, Bookmark, Download} from "lucide-react";
 
 export default function SimplifiedArticle({article}) {
-    if (!article || !article.simplified_text) {
+    if (!article || !article.simplified) {
         return null;
     }
 
@@ -73,7 +73,7 @@ export default function SimplifiedArticle({article}) {
                     {currentWord}
                   </span>
                                 </TooltipTrigger>
-                                <TooltipContent className="max-w-xs bg-white p-3 shadow-lg rounded-lg border">
+                                <TooltipContent className="max-w-xs bg-white dark:bg-gray-800 p-3 shadow-lg rounded-lg border dark:border-gray-700">
                                     <div>
                                         <div className="font-medium mb-1">{cleanWord}</div>
                                         <div className="text-sm text-gray-600">{termMap.get(cleanWord)}</div>
@@ -146,15 +146,19 @@ export default function SimplifiedArticle({article}) {
                 result.push(buffer.join(' '));
             }
 
-            return <p key={`p-${pIndex}`} className="mb-4 leading-relaxed">{result}</p>;
+            return (
+                <p key={`p-${pIndex}`} className="mb-4 leading-relaxed text-gray-800 dark:text-gray-100">
+                    {result}
+                </p>
+            );
         });
     };
 
     return (
         <div>
-            <div className="bg-white rounded-xl shadow-sm p-6 md:p-8">
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-6 md:p-8">
                 <div className="flex justify-between items-start mb-6">
-                    <h1 className="text-2xl font-bold text-gray-900 leading-tight">{article.title}</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-200 leading-tight">{article.title}</h1>
                     <div className="flex space-x-2">
                         <Button variant="outline" size="icon">
                             <Bookmark className="h-4 w-4 text-gray-600"/>
@@ -165,8 +169,8 @@ export default function SimplifiedArticle({article}) {
                     </div>
                 </div>
 
-                <div className="prose max-w-none" ref={articleRef}>
-                    {highlightTerms({text: article.simplified_text, terms: article.terms})}
+                <div className="prose max-w-none text-gray-800 dark:text-gray-100" ref={articleRef}>
+                    {highlightTerms({text: article.simplified, terms: article.terms})}
                 </div>
 
                 {article.file_url && (
