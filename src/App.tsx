@@ -3,6 +3,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Upload from "./Components/Upload/Upload";
 import Library from "./Components/Library/Library";
+import Article from "./Components/Article/Article";
 
 function App() {
     return (
@@ -22,6 +23,14 @@ function App() {
                         element={
                             <Layout currentPageName="Library">
                                 <Library/>
+                            </Layout>
+                        }
+                    />
+                    <Route
+                        path='/article/:id'
+                        element={
+                            <Layout currentPageName='Article'>
+                                <Article/>
                             </Layout>
                         }
                     />

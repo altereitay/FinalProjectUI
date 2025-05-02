@@ -21,8 +21,15 @@ export default function Library() {
     const loadArticles = async () => {
         setIsLoading(true);
         try {
-            const data = ['art1', 'art2']
-            setArticles(data);
+            const res = await fetch('http://localhost:8080/articles', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const json = await res.json();
+            setArticles(json);
         } catch (error) {
             console.error("Error loading articles:", error);
         } finally {
