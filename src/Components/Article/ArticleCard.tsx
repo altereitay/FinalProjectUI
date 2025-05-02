@@ -21,7 +21,7 @@ export default function ArticleCard({article}) {
 
     return (
         //TODO: add dynamic article choosing
-        <Link to='ArticleID'>
+        <Link to={`/article/${article.id}`} state={article}>
             <Card className="h-full overflow-hidden transition-all hover:shadow-md">
                 <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
@@ -31,7 +31,7 @@ export default function ArticleCard({article}) {
                         </div>
 
                         <div className="space-y-2 min-w-0">
-                            <h3 className="font-medium text-gray-100 text-lg leading-tight line-clamp-2">
+                            <h3 className="font-medium text-gray-900 dark:text-gray-100 text-lg leading-tight line-clamp-2">
                                 {article.title}
                             </h3>
 

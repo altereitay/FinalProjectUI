@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Button} from "../ui/button";
 import {Skeleton} from "../ui/skeleton";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {ArrowLeft, Loader2} from "lucide-react";
 
 import SimplifiedArticle from "./SimplifiedArticle";
@@ -11,6 +11,7 @@ export default function Article() {
     const [article, setArticle] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {state} = useLocation();
 
     useEffect(() => {
         loadArticle();
@@ -19,17 +20,12 @@ export default function Article() {
     const loadArticle = async () => {
         setIsLoading(true);
         try {
-            // Get article ID from URL
-            //TODO: add getting an article from db
-            // const urlParams = new URLSearchParams(window.location.search);
-            // const articleId = urlParams.get("id");
-            //
-            // if (!articleId) {
-            //     throw new Error("No article ID provided");
-            // }
-            //
-            // const articleData = await ArticleEntity.get(articleId);
-            // setArticle(articleData);
+            console.log(state)
+            if (state !== undefined) {
+                setArticle(state)
+            } else {
+                setError("Could not load the article. It may have been deleted or you don't have permission to view it.");
+            }
         } catch (error) {
             console.error("Error loading article:", error);
             setError("Could not load the article. It may have been deleted or you don't have permission to view it.");
@@ -38,17 +34,21 @@ export default function Article() {
         }
     };
 
-    const renderLoadingState = () => (
-        <div className="space-y-6">
-            <Skeleton className="h-12 w-3/4"/>
-            <div className="space-y-4">
-                <Skeleton className="h-4 w-full"/>
-                <Skeleton className="h-4 w-5/6"/>
-                <Skeleton className="h-4 w-full"/>
-                <Skeleton className="h-4 w-3/4"/>
+    const renderLoadingState = () => {
+        console.log('render')
+        console.log(article)
+        return (
+            <div className="space-y-6">
+                <Skeleton className="h-12 w-3/4"/>
+                <div className="space-y-4">
+                    <Skeleton className="h-4 w-full"/>
+                    <Skeleton className="h-4 w-5/6"/>
+                    <Skeleton className="h-4 w-full"/>
+                    <Skeleton className="h-4 w-3/4"/>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 
     const renderErrorState = () => (
         <div className="text-center py-12 border rounded-lg bg-red-50">
@@ -61,7 +61,7 @@ export default function Article() {
             <p className="text-gray-500 mb-6 max-w-md mx-auto">
                 {error}
             </p>
-            <Link to='library'>
+            <Link to={'/library'}>
                 <Button variant="outline">
                     Return to Library
                 </Button>
@@ -72,7 +72,7 @@ export default function Article() {
     return (
         <div className="space-y-6">
             <div className="flex items-center mb-6">
-                <Link to='library'>
+                <Link to={'/library'}>
                     <Button variant="outline" size="icon" className="mr-4">
                         <ArrowLeft className="h-4 w-4"/>
                     </Button>
