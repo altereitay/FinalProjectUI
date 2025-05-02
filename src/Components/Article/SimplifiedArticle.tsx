@@ -127,7 +127,7 @@ export default function SimplifiedArticle({article}) {
                                 );
 
                                 result.push(' ');
-                                i += termWords.length - 1; // Skip ahead
+                                i += termWords.length - 1;
                                 foundMultiWordTerm = true;
                                 break;
                             }

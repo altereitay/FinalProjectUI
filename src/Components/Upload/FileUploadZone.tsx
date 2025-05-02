@@ -50,11 +50,11 @@ export default function FileUploadZone({onFileSelected}) {
                     <Upload className="h-8 w-8 text-indigo-600"/>
                 </div>
 
-                <h3 className="text-lg font-medium text-gray-900 mb-1">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">
                     Upload your scientific article
                 </h3>
 
-                <p className="text-sm text-gray-500 mb-4 max-w-md">
+                <p className="text-sm text-gray-400 mb-4 max-w-md">
                     Drag and drop your PDF or text document, or click to browse your files
                 </p>
 
