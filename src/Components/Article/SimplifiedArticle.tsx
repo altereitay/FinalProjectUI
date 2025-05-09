@@ -75,8 +75,8 @@ export default function SimplifiedArticle({article}) {
                                 </TooltipTrigger>
                                 <TooltipContent className="max-w-xs bg-white dark:bg-gray-800 p-3 shadow-lg rounded-lg border dark:border-gray-700">
                                     <div>
-                                        <div className="font-medium mb-1">{cleanWord}</div>
-                                        <div className="text-sm text-gray-600">{termMap.get(cleanWord)}</div>
+                                        <div className="font-medium mb-1 text-gray-900 dark:text-gray-100">{cleanWord}</div>
+                                        <div className="text-sm text-gray-600 dark:text-gray-100">{termMap.get(cleanWord)}</div>
                                     </div>
                                 </TooltipContent>
                             </Tooltip>

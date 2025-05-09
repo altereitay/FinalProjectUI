@@ -22,23 +22,37 @@ export default function Upload() {
 
     const processArticle = async () => {
         if (!file) return;
-
+        let extractionResult = {};
+        let json = {};
         try {
             setProcessing(true);
             setProcessingStage("uploading");
+            // TODO: change to real API
+            try {
+                const res = await fetch('http://localhost:8080/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-            // TODO: Upload file API
+                json = await res.json();
+
+            } catch (error) {
+                console.error("Error loading articles:", error);
+            } finally {
+                extractionResult = {
+                    status: "success",
+                    output: {
+                        text: json.original,
+                        title: json.title,
+                    },
+                };
+            }
 
             setProcessingStage("analyzing");
 
             // TODO: Extraction API
-            const extractionResult = {
-                status: "success",
-                output: {
-                    text: "test text",
-                    title: "article number 1",
-                },
-            };
 
             if (extractionResult.status !== "success") {
                 throw new Error("Failed to extract text from the document");
@@ -51,9 +65,9 @@ export default function Upload() {
             const articleData = {
                 title: extractedTitle,
                 original_text: originalText,
-                simplified_text: "simplified version",
+                simplified_text: json.simplified,
                 date_simplified: new Date().toISOString(),
-                terms: ["term 1", "term 2"],
+                terms: json.terms,
             };
 
             setProcessingStage("completed");
@@ -69,7 +83,7 @@ export default function Upload() {
     };
 
     const viewSimplifiedArticle = () => {
-        navigate("/art1");
+        navigate("/library");
     };
 
     return (
