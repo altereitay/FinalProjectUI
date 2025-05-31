@@ -21,7 +21,7 @@ export default function Library() {
     const loadArticles = async () => {
         setIsLoading(true);
         try {
-            const res = await fetch('http://localhost:8080/articles', {
+            const res = await fetch('https://scisimplify.online:8081/articles', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

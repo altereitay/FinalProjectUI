@@ -63,7 +63,7 @@ export default function FileUploadZone({onFileSelected}) {
                     ref={fileInputRef}
                     onChange={handleFileChange}
                     className="hidden"
-                    accept=".pdf,.txt,.doc,.docx"
+                    accept=".pdf,.txt,.docx"
                 />
 
                 <Button
@@ -75,7 +75,7 @@ export default function FileUploadZone({onFileSelected}) {
                 </Button>
 
                 <p className="text-xs text-gray-400 mt-4">
-                    Supported formats: PDF, TXT, DOC, DOCX
+                    Supported formats: PDF, TXT, DOCX
                 </p>
             </div>
         </div>

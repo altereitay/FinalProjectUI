@@ -24,16 +24,16 @@ export default function Upload() {
         if (!file) return;
         let extractionResult = {};
         let json = {};
+        const formData = new FormData();
+        formData.append('file', file);
         try {
             setProcessing(true);
             setProcessingStage("uploading");
             // TODO: change to real API
             try {
-                const res = await fetch('http://localhost:8080/upload', {
+                const res = await fetch('https://scisimplify.online:8081/article/new', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    body: formData
                 });
 
                 json = await res.json();
