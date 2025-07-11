@@ -22,7 +22,7 @@ export default function Library() {
         setIsLoading(true);
         try {
             const res = await fetch('https://scisimplify.online:8081/articles', {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
